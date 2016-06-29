@@ -5,11 +5,8 @@ import edu.pdx.cs410J.AbstractAppointmentBook;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.List;
 
-/**
- * Created by Deven on 6/27/2016.
- */
+
 public class AppointmentBook extends AbstractAppointmentBook {
     String owner;
     ArrayList<Appointment> appointmentList;
@@ -31,11 +28,6 @@ public class AppointmentBook extends AbstractAppointmentBook {
 
     @Override
     public void addAppointment(AbstractAppointment abstractAppointment) {
-
-    }
-
-
-    public void addAppointment(Appointment appointment) {
-        this.appointmentList.add(appointment);
+        this.appointmentList.add((Appointment) abstractAppointment);
     }
 }

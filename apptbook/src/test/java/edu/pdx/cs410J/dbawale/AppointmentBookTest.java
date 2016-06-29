@@ -31,4 +31,14 @@ public class AppointmentBookTest {
         assertEquals(mylist.get(0).getEndTimeString(),"01");
         assertEquals(mylist.get(0).getBeginTimeString(),"00");
     }
+
+    @Test
+    public void addAnotherAppointmentToAppointmentBook() throws Exception{
+        AppointmentBook appointmentBook = new AppointmentBook("deven");
+        appointmentBook.addAppointment(new Appointment("anothermeeting","02","03"));
+        ArrayList<Appointment>mylist = (ArrayList)appointmentBook.getAppointments();
+        assertEquals(mylist.get(0).description,"anothermeeting");
+        assertEquals(mylist.get(0).getBeginTimeString(),"02");
+        assertEquals(mylist.get(0).getEndTimeString(),"03");
+    }
 }
