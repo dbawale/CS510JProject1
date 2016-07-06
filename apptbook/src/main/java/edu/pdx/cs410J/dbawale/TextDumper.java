@@ -15,9 +15,7 @@ public class TextDumper implements edu.pdx.cs410J.AppointmentBookDumper
         ostream.write("\n".getBytes());
         ArrayList<Appointment> currentappointments = new ArrayList<Appointment>();
         currentappointments = (ArrayList)abstractAppointmentBook.getAppointments();
-        for(int i=0;i<currentappointments.size();i++)
-        {
-            Appointment appointment = currentappointments.get(i);
+        for (Appointment appointment : currentappointments) {
             ostream.write(appointment.description.getBytes());
             ostream.write("*#*".getBytes());
             ostream.write(appointment.beginTime.getBytes());
