@@ -15,6 +15,11 @@ public class AppointmentBook extends AbstractAppointmentBook {
     String owner;
     ArrayList<Appointment> appointmentList;
 
+    public AppointmentBook(){
+        this.owner=null;
+        this.appointmentList=null;
+    }
+
     /**
      * Constructor for AppointmentBook
      * @param owner The name of the owner
