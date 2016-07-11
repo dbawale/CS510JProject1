@@ -26,4 +26,62 @@ public class TextParserTest {
             System.out.println(appt.toString());
         }
     }
+
+    @Test
+    public void outputToStdOutAnotherTest () throws ParserException {
+        TextParser parser = new TextParser("deven bawale");
+        AbstractAppointmentBook apptbook = (AppointmentBook)parser.parse();
+        ArrayList<Appointment> appts;
+        appts = (ArrayList<Appointment>) apptbook.getAppointments();
+        for( Appointment appt: appts)
+        {
+            System.out.println(appt.toString());
+        }
+    }
+
+    @Test (expected = ParserException.class)
+    public void emptyFileTest () throws ParserException {
+        TextParser parser = new TextParser("test");
+        AbstractAppointmentBook apptbook = (AppointmentBook)parser.parse();
+        ArrayList<Appointment> appts;
+        appts = (ArrayList<Appointment>) apptbook.getAppointments();
+        for( Appointment appt: appts)
+        {
+            System.out.println(appt.toString());
+        }
+    }
+
+    @Test (expected = ParserException.class)
+    public void malformedFileTest () throws ParserException {
+        TextParser parser = new TextParser("test1.txt");
+        AbstractAppointmentBook apptbook = (AppointmentBook)parser.parse();
+        ArrayList<Appointment> appts;
+        appts = (ArrayList<Appointment>) apptbook.getAppointments();
+        for( Appointment appt: appts)
+        {
+            System.out.println(appt.toString());
+        }
+    }
+
+    @Test (expected = ParserException.class)
+    public void anotherMalformedFileTest () throws ParserException {
+        TextParser parser = new TextParser("test2.txt");
+        AbstractAppointmentBook apptbook = (AppointmentBook)parser.parse();
+        ArrayList<Appointment> appts;
+        appts = (ArrayList<Appointment>) apptbook.getAppointments();
+        for( Appointment appt: appts)
+        {
+            System.out.println(appt.toString());
+        }
+    }
+
+    @Test
+    public void aFileThatDoesntExistTest () throws ParserException {
+        TextParser parser = new TextParser("some random file");
+        AbstractAppointmentBook apptbook = (AppointmentBook)parser.parse();
+        assertThat(apptbook.getOwnerName(),equalTo(null));
+        assertThat(apptbook.getAppointments(),equalTo(null));
+    }
+
+
 }

@@ -7,6 +7,8 @@ import edu.pdx.cs410J.ParserException;
 import javax.xml.soap.Text;
 import java.io.*;
 
+import static java.lang.System.exit;
+
 public class TextParser implements edu.pdx.cs410J.AppointmentBookParser {
     String filename;
 
@@ -27,11 +29,15 @@ public class TextParser implements edu.pdx.cs410J.AppointmentBookParser {
             {
                 readfromfile+=(char)c;
             }
-            String[]lines=readfromfile.split("\n");
-            for(int i=0;i<lines.length;i++)
+            if(readfromfile.equals(""))
             {
-                System.out.println(lines[i]);
+                throw new ParserException("Cannot read from empty file");
             }
+            String[]lines=readfromfile.split("\n");
+//            for(int i=0;i<lines.length;i++)
+//            {
+//                System.out.println(lines[i]);
+//            }
             if(lines[0].equals(this.filename))
             {
                 apptbook = new AppointmentBook(lines[0]);
@@ -56,6 +62,7 @@ public class TextParser implements edu.pdx.cs410J.AppointmentBookParser {
                         {
                             Appointment appt = new Appointment(apptline[0],apptline[2],apptline[4]);
                             apptbook.addAppointment(appt);
+                            System.out.println(apptbook.toString());
                         }
                     }
                     else
@@ -67,17 +74,19 @@ public class TextParser implements edu.pdx.cs410J.AppointmentBookParser {
             }
 
         } catch (FileNotFoundException e) {
-            try {
-                FileOutputStream outputStream = new FileOutputStream(filename);
-            } catch (FileNotFoundException e1) {
-                System.err.println("Error creating file. Please try again.");
-                return new AppointmentBook();
-            }
+//            try {
+//                FileOutputStream outputStream = new FileOutputStream(filename);
+//            } catch (FileNotFoundException e1) {
+//                System.err.println("Error creating file. Please try again.");
+//                return new AppointmentBook();
+//            }
+            System.err.println("Could not find file: " + filename + ". Creating empty appointment book with null objects.");
+            return new AppointmentBook();
         } catch (IOException e) {
             throw new ParserException("Error parsing file",e);
         }
 
-        System.out.println(apptbook.toString());
+
         return apptbook;
     }
 

@@ -1,3 +1,5 @@
+//TODO: Check what happens when options are provided at the end
+
 package edu.pdx.cs410J.dbawale;
 
 import static java.lang.System.exit;
@@ -31,25 +33,59 @@ public class Project1 {
       System.err.println("Invalid number of arguments detected. Please try again. Missing command line arguments");
       exit(1);
     }
-    if(length>6) {
-      checkforreadme(args);
-    }
 
-    if(length>6) {
-      try {
-        checkoptions(args);
-      } catch (Exception e) {
-        System.err.println("Please check the provided options again\n");
-        exit(1);
+    for(String arg: args)
+    {
+      if(arg.equals("-README"))
+      {
+        System.out.println("This program creates a new appointment for the owner specified and saves it in the\n" +
+                "Appointment class. It can also optionally print the appointment details.");
+        exit(0);
       }
     }
 
-    try {
-      processargs(args);
-    } catch (Exception e) {
-      System.err.println("Description must not be empty");
-      exit(1);
+    for(int i=0;i<args.length;i++)
+    {
+      if(args[i].charAt(0)=='-')
+      {
+        try {
+          checkcurrentoption(args[i]);
+        } catch (Exception e) {
+          System.err.println("Incorrect option detected. Please try again.");
+          exit(1);
+        }
+      }
+      else
+      {
+        try {
+          processcurrentargs(args,i);
+          i+=5;
+        } catch (Exception e) {
+          System.err.println("Arguments incorrect");
+          exit(1);
+        }
+      }
+
     }
+//    if(length>6) {
+//      checkforreadme(args);
+//    }
+//
+//    if(length>6) {
+//      try {
+//        checkoptions(args);
+//      } catch (Exception e) {
+//        System.err.println("Please check the provided options again\n");
+//        exit(1);
+//      }
+//    }
+//
+//    try {
+//      processargs(args);
+//    } catch (Exception e) {
+//      System.err.println("Description must not be empty");
+//      exit(1);
+//    }
 
     exit(0);
 
@@ -109,6 +145,51 @@ public class Project1 {
     }
   }
 
+  private static void processcurrentargs(String[] args, int index) throws Exception {
+    try {
+      if (!checkdate(args[index]) && !checkdate(args[index+1])) {
+        if (checkdate(args[index + 2]) && checkdate(args[index + 4])) {
+          if (checktime(args[index + 3]) && checktime(args[index + 5])) {
+            owner = args[index];
+            descrption = args[index + 1];
+            if(descrption=="")
+            {
+              throw new Exception();
+            }
+            begindate = args[index + 2];
+            begintime = args[index + 3];
+            enddate = args[index + 4];
+            endtime = args[index + 5];
+            begin = begindate + " " + begintime;
+            end = enddate + " " + endtime;
+            AppointmentBook book = new AppointmentBook(owner);
+            Appointment appointment = new Appointment(descrption, begin, end);
+            book.addAppointment(appointment);
+            if (processoptions) {
+              System.out.println(appointment.toString());
+            } else {
+              System.out.println("Appointment created!");
+            }
+          } else {
+            System.err.println("Please check format of time and try again\n");
+            exit(1);
+          }
+        } else {
+          System.err.println("Please check format of date and try again\n");
+          exit(1);
+        }
+      } else {
+        System.err.println("Either owner or description are of the format DATE or TIME. Please enter correct format.\n");
+        exit(1);
+      }
+    }
+    catch (NumberFormatException e)
+    {
+      System.err.println("Check command format and try again.");
+      exit(1);
+    }
+  }
+
   /**
    * Takes a set of arguments and checks their number for validation
    * @param args A set of arguments from commmand line
@@ -117,13 +198,13 @@ public class Project1 {
      */
   private static int checkargumentlength(String[] args) throws Exception
   {
-    if(args.length==1&&args[0].equals("-README"))
-    {
-      System.out.println("This program creates a new appointment for the owner specified and saves it in the\n" +
-              "Appointment class. It can also optionally print the appointment details.");
-      exit(0);
-    }
-    else if(args.length<6&&args.length!=1)
+//    if(args.length==1&&args[0].equals("-README"))
+//    {
+//      System.out.println("This program creates a new appointment for the owner specified and saves it in the\n" +
+//              "Appointment class. It can also optionally print the appointment details.");
+//      exit(0);
+//    }
+    /*else*/ if(args.length<6&&args.length!=1)
     {
       throw new Exception();
     }
@@ -149,6 +230,23 @@ public class Project1 {
     else
     {
       throw new Exception();
+    }
+  }
+
+  private static void checkcurrentoption(String option) throws Exception
+  {
+    switch(option)
+    {
+      case "-print":
+        processoptions=true;
+      break;
+      case "-README":
+        System.out.println("This program creates a new appointment for the owner specified and saves it in the\n" +
+                "Appointment class. It can also optionally print the appointment details.");
+        exit(0);
+      break;
+       default:
+         throw new Exception();
     }
   }
 
