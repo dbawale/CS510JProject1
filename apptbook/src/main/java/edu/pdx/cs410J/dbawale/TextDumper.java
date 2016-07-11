@@ -6,8 +6,17 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 
+/**
+ * The TextDumper class. Contains implementation for writing the current data to a file
+ * in a pre-specified format.
+ */
 public class TextDumper implements edu.pdx.cs410J.AppointmentBookDumper
 {
+    /**
+     * Dumps the data specified on the command line to a file with a pre-specified format
+     * @param abstractAppointmentBook The appointment book to be dumped to file
+     * @throws IOException If the file was not found, or there was any problem writing to file
+     */
     @Override
     public void dump(AbstractAppointmentBook abstractAppointmentBook) throws IOException {
         FileOutputStream ostream = new FileOutputStream(abstractAppointmentBook.getOwnerName());

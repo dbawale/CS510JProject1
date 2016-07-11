@@ -9,14 +9,28 @@ import java.io.*;
 
 import static java.lang.System.exit;
 
+/**
+ * The TextParser class. This class implements the AppointmentBookParser interface.
+ * filename is the name of the file specified on command line. It is passed to the constructor
+ */
 public class TextParser implements edu.pdx.cs410J.AppointmentBookParser {
     String filename;
 
+    /**
+     * Constructor for TextParser class.
+     * Assigns the file given on the command line to this.filename.
+     * @param file The name of the file as specified on the command line
+     */
     public TextParser(String file){
         this.filename=file;
     }
 
 
+    /**
+     * Parses the input file specified on the command line and creates appointment if successful.
+     * @return The appointment book created if parsing was successful, an appointmentbook with null data if file was not found
+     * @throws ParserException If the file or data is malformatted
+     */
     @Override
     public AbstractAppointmentBook parse() throws ParserException {
         String readfromfile="";

@@ -1,5 +1,3 @@
-//TODO: Check what happens when options are provided at the end
-
 package edu.pdx.cs410J.dbawale;
 
 import static java.lang.System.exit;
@@ -19,6 +17,8 @@ public class Project1 {
   private static String begin= "",end= "";
   private static int length=0;
   private static Boolean processoptions=false;
+  private static AppointmentBook book;
+  private static Appointment appointment;
 
   /**
    * The main method for the appointment book Project. Creates an appointment specified by
@@ -64,6 +64,9 @@ public class Project1 {
           System.err.println("Arguments incorrect");
           exit(1);
         }
+      }
+      if (processoptions) {
+        System.out.println(appointment.toString());
       }
 
     }
@@ -145,6 +148,16 @@ public class Project1 {
     }
   }
 
+  /**
+   * Processes a set of given arguments that are previously checked for validiy.
+   * Checks whether the arguments at position index and index + 1 are not dates or times.
+   * Checks whether the arguments at position index + 2 and index + 4 are dates.
+   * Checks whether the arguments at position index + 3 and index + 5 are times.
+   * Creates the appointment and prints description if processoptions flag is set
+   * @param args A set of arguments that have been checked for validity
+   * @param index The starting index at which options are present in args[]
+   * @throws Exception Throws an exception if the description is found to be empty.
+   */
   private static void processcurrentargs(String[] args, int index) throws Exception {
     try {
       if (!checkdate(args[index]) && !checkdate(args[index+1])) {
@@ -162,8 +175,8 @@ public class Project1 {
             endtime = args[index + 5];
             begin = begindate + " " + begintime;
             end = enddate + " " + endtime;
-            AppointmentBook book = new AppointmentBook(owner);
-            Appointment appointment = new Appointment(descrption, begin, end);
+            book = new AppointmentBook(owner);
+            appointment = new Appointment(descrption, begin, end);
             book.addAppointment(appointment);
             if (processoptions) {
               System.out.println(appointment.toString());
@@ -233,6 +246,12 @@ public class Project1 {
     }
   }
 
+  /**
+   * Checks the current option being processed and takes appropriate action.
+   * Throws an exception if an illegal option was specified.
+   * @param option The current option being processed
+   * @throws Exception If an illegal option was specified on the command line
+     */
   private static void checkcurrentoption(String option) throws Exception
   {
     switch(option)
