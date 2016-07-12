@@ -76,7 +76,7 @@ public class TextParser implements edu.pdx.cs410J.AppointmentBookParser {
                         {
                             Appointment appt = new Appointment(apptline[0],apptline[2],apptline[4]);
                             apptbook.addAppointment(appt);
-                            System.out.println(apptbook.toString());
+                            //System.out.println(apptbook.toString());
                         }
                     }
                     else

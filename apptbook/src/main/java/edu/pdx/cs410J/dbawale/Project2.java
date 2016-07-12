@@ -58,7 +58,7 @@ public class Project2 {
             {
                 try {
                     checkcurrentoption(args[i],args,i);
-                    if(processfile)
+                    if(processfile && !args[i].equals("-print"))
                     {
                         i+=1;
                         textFile=args[i];
@@ -212,6 +212,11 @@ public class Project2 {
         }
     }
 
+    /**
+     * Reads appointment book from file specified, adds the current appointment to the
+     * appointmentbook and writes all data back.
+     * @param filename The name of the file where appointemnts are stored
+     */
     private static void readandaddappointments(String filename)
     {
         try {
