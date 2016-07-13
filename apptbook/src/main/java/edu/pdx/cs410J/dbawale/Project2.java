@@ -82,7 +82,7 @@ public class Project2 {
             System.out.println(appointment.toString());
         }
         if(appointmentadded && processfile){
-            readandaddappointments(textFile);
+            readandaddappointments(textFile,owner);
         }
 
 
@@ -205,7 +205,8 @@ public class Project2 {
                 break;
             case "-textFile":
                 processfile=true;
-                readandaddappointments(args[index+1]);
+                //readandaddappointments(args[index+1]);
+                textFile=args[index+1];
                 break;
             default:
                 throw new Exception();
@@ -215,13 +216,15 @@ public class Project2 {
     /**
      * Reads appointment book from file specified, adds the current appointment to the
      * appointmentbook and writes all data back.
+     * Also passes the owner name to the parser.
      * @param filename The name of the file where appointemnts are stored
+     * @param owner The name of the owner as specified on the command line
      */
-    private static void readandaddappointments(String filename)
+    private static void readandaddappointments(String filename, String owner)
     {
         try {
         TextParser parser = new TextParser(filename);
-
+            parser.setOwner(owner);
            book = (AppointmentBook) parser.parse();
             if(appointmentadded) {
                 appointmentadded=false;

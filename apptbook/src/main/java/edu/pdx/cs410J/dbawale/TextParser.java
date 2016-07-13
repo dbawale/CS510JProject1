@@ -15,6 +15,16 @@ import static java.lang.System.exit;
  */
 public class TextParser implements edu.pdx.cs410J.AppointmentBookParser {
     String filename;
+    String owner="";
+
+    /**
+     * Sets the owner of the parser as specified on the command line
+     * @param owner The owner name specified on the command line
+     */
+    public void setOwner(String owner)
+    {
+        this.owner=owner;
+    }
 
     /**
      * Constructor for TextParser class.
@@ -52,7 +62,8 @@ public class TextParser implements edu.pdx.cs410J.AppointmentBookParser {
 //            {
 //                System.out.println(lines[i]);
 //            }
-            if(lines[0].equals(this.filename))
+            //if(lines[0].equals(this.filename))
+            if(lines[0].equals(owner))
             {
                 apptbook = new AppointmentBook(lines[0]);
             }
