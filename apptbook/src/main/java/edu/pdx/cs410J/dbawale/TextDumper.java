@@ -4,6 +4,7 @@ import edu.pdx.cs410J.AbstractAppointmentBook;
 
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.text.DateFormat;
 import java.util.ArrayList;
 
 /**
@@ -20,6 +21,7 @@ public class TextDumper implements edu.pdx.cs410J.AppointmentBookDumper
     @Override
     public void dump(AbstractAppointmentBook abstractAppointmentBook) throws IOException {
         FileOutputStream ostream = new FileOutputStream(abstractAppointmentBook.getOwnerName());
+        DateFormat df = DateFormat.getDateTimeInstance(DateFormat.SHORT,DateFormat.SHORT);
         ostream.write(abstractAppointmentBook.getOwnerName().getBytes());
         ostream.write("\n".getBytes());
         ArrayList<Appointment> currentappointments = new ArrayList<Appointment>();
@@ -27,9 +29,11 @@ public class TextDumper implements edu.pdx.cs410J.AppointmentBookDumper
         for (Appointment appointment : currentappointments) {
             ostream.write(appointment.description.getBytes());
             ostream.write("*#*".getBytes());
-            ostream.write(appointment.beginTime.toString().getBytes());
+            //ostream.write(appointment.beginTime.toString().getBytes());
+            ostream.write(df.format(appointment.beginTime).getBytes());
             ostream.write("*#*".getBytes());
-            ostream.write(appointment.endTime.toString().getBytes());
+            //ostream.write(appointment.endTime.toString().getBytes());
+            ostream.write(df.format(appointment.endTime).getBytes());
             ostream.write("\n".getBytes());
         }
     }

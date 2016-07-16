@@ -87,13 +87,13 @@ public class TextParser implements edu.pdx.cs410J.AppointmentBookParser {
                     //if(checkdate(startTime[0])&&checktime(startTime[1]))
                     //{
                         String endTime[]=apptline[4].split(" ");
-                        if(checkdate(endTime[0])&&checktime(endTime[1]))
-                        {
+                        //if(checkdate(endTime[0])&&checktime(endTime[1]))
+                        //{
                             //Appointment appt = new Appointment(apptline[0],apptline[2],apptline[4]);
                             Appointment appt = new Appointment(apptline[0],df.parse(apptline[2]),df.parse(apptline[4]));
                             apptbook.addAppointment(appt);
                             //System.out.println(apptbook.toString());
-                        }
+                        //}
                     //}
                     //else
                     //{
