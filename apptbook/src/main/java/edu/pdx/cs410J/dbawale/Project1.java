@@ -121,7 +121,7 @@ public class Project1 {
             begin = begindate + " " + begintime;
             end = enddate + " " + endtime;
             AppointmentBook book = new AppointmentBook(owner);
-            Appointment appointment = new Appointment(descrption, begin, end);
+            //Appointment appointment = new Appointment(descrption, begin, end);
             book.addAppointment(appointment);
             if (processoptions) {
               System.out.println(appointment.toString());
@@ -176,7 +176,7 @@ public class Project1 {
             begin = begindate + " " + begintime;
             end = enddate + " " + endtime;
             book = new AppointmentBook(owner);
-            appointment = new Appointment(descrption, begin, end);
+            //appointment = new Appointment(descrption, begin, end);
             book.addAppointment(appointment);
             if (processoptions) {
               System.out.println(appointment.toString());

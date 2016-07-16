@@ -12,7 +12,7 @@ import static java.lang.System.exit;
 /**
  * The main class for the CS410J appointment book Project
  */
-public class Project2 {
+public class Project3 {
     private static String owner = "";
     private static String descrption = "";
     private static String begindate= "";
@@ -50,7 +50,7 @@ public class Project2 {
             {
                 System.out.println("This program creates a new appointment for the owner specified and saves it in the\n" +
                         "Appointment class. It can also optionally print the appointment details.\n" +
-                "It can optionally read and write appointments to an appointment book present in a file.");
+                        "It can optionally read and write appointments to an appointment book present in a file.");
                 exit(0);
             }
         }
@@ -174,14 +174,14 @@ public class Project2 {
      */
     private static int checkargumentlength(String[] args) throws Exception
     {
-     if(args.length<6&&args.length!=1)
-    {
-        throw new Exception();
-    }
-    else if(args.length>12)
-    {
-        throw new Exception();
-    }
+        if(args.length<6&&args.length!=1)
+        {
+            throw new Exception();
+        }
+        else if(args.length>12)
+        {
+            throw new Exception();
+        }
         return args.length;
     }
 
@@ -241,9 +241,9 @@ public class Project2 {
     private static void readandaddappointments(String filename, String owner)
     {
         try {
-        TextParser parser = new TextParser(filename);
+            TextParser parser = new TextParser(filename);
             parser.setOwner(owner);
-           book = (AppointmentBook) parser.parse();
+            book = (AppointmentBook) parser.parse();
             if(appointmentadded) {
                 appointmentadded=false;
                 book.addAppointment(appointment);

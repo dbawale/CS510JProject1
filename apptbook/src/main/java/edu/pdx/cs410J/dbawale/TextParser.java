@@ -4,8 +4,11 @@ package edu.pdx.cs410J.dbawale;
 import edu.pdx.cs410J.AbstractAppointmentBook;
 import edu.pdx.cs410J.ParserException;
 
+import javax.swing.text.html.parser.Parser;
 import javax.xml.soap.Text;
 import java.io.*;
+import java.text.DateFormat;
+import java.text.ParseException;
 
 import static java.lang.System.exit;
 
@@ -79,21 +82,23 @@ public class TextParser implements edu.pdx.cs410J.AppointmentBookParser {
                 }
                 if(checkdate(apptline[0])==false&&checktime(apptline[0])==false)
                 {
+                    DateFormat df = DateFormat.getDateTimeInstance(DateFormat.SHORT,DateFormat.SHORT);
                     String startTime[]=apptline[2].split(" ");
-                    if(checkdate(startTime[0])&&checktime(startTime[1]))
-                    {
+                    //if(checkdate(startTime[0])&&checktime(startTime[1]))
+                    //{
                         String endTime[]=apptline[4].split(" ");
                         if(checkdate(endTime[0])&&checktime(endTime[1]))
                         {
-                            Appointment appt = new Appointment(apptline[0],apptline[2],apptline[4]);
+                            //Appointment appt = new Appointment(apptline[0],apptline[2],apptline[4]);
+                            Appointment appt = new Appointment(apptline[0],df.parse(apptline[2]),df.parse(apptline[4]));
                             apptbook.addAppointment(appt);
                             //System.out.println(apptbook.toString());
                         }
-                    }
-                    else
-                    {
-                        throw new ParserException("Error in date format");
-                    }
+                    //}
+                    //else
+                    //{
+                    //    throw new ParserException("Error in date format");
+                    //}
                 }
 
             }
@@ -109,6 +114,8 @@ public class TextParser implements edu.pdx.cs410J.AppointmentBookParser {
             return new AppointmentBook();
         } catch (IOException e) {
             throw new ParserException("Error parsing file",e);
+        } catch (ParseException e) {
+            throw new ParserException("Error parsing date time format",e);
         }
 
 

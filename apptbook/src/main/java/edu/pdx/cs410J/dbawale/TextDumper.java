@@ -27,9 +27,9 @@ public class TextDumper implements edu.pdx.cs410J.AppointmentBookDumper
         for (Appointment appointment : currentappointments) {
             ostream.write(appointment.description.getBytes());
             ostream.write("*#*".getBytes());
-            ostream.write(appointment.beginTime.getBytes());
+            ostream.write(appointment.beginTime.toString().getBytes());
             ostream.write("*#*".getBytes());
-            ostream.write(appointment.endTime.getBytes());
+            ostream.write(appointment.endTime.toString().getBytes());
             ostream.write("\n".getBytes());
         }
     }

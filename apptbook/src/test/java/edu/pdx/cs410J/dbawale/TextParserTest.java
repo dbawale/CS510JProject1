@@ -18,6 +18,7 @@ public class TextParserTest {
     @Test
     public void outputToStdOutTest () throws ParserException {
         TextParser parser = new TextParser("deven");
+        parser.setOwner("deven");
         AbstractAppointmentBook apptbook = (AppointmentBook)parser.parse();
         ArrayList<Appointment> appts;
         appts = (ArrayList<Appointment>) apptbook.getAppointments();
@@ -30,6 +31,7 @@ public class TextParserTest {
     @Test
     public void outputToStdOutAnotherTest () throws ParserException {
         TextParser parser = new TextParser("deven bawale");
+        parser.setOwner("deven bawale");
         AbstractAppointmentBook apptbook = (AppointmentBook)parser.parse();
         ArrayList<Appointment> appts;
         appts = (ArrayList<Appointment>) apptbook.getAppointments();

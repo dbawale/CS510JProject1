@@ -54,5 +54,27 @@ public class AppointmentBook extends AbstractAppointmentBook {
     @Override
     public void addAppointment(AbstractAppointment abstractAppointment) {
         this.appointmentList.add((Appointment) abstractAppointment);
+        this.sort();
+    }
+
+    /**
+     * Sorts the appointments in the appointment book, chronologically by begin time.
+     * If two appointments begin at the same time, they are sorted chronologically by end time.
+     * Otherwise, they are sorted lexicographically by description.
+     */
+    public void sort()
+    {
+        for(int i =0;i<appointmentList.size()-1;i++)
+        {
+            for(int j=0;j<appointmentList.size()-1-i;j++)
+            {
+                if(appointmentList.get(j).compareTo(appointmentList.get(j+1))>=0)
+                {
+                    Appointment temp = appointmentList.get(j);
+                    appointmentList.set(j,appointmentList.get(j+1));
+                    appointmentList.set(j+1,temp);
+                }
+            }
+        }
     }
 }
