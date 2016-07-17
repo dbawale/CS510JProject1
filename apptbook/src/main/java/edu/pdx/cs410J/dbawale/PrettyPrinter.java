@@ -17,6 +17,11 @@ import java.util.concurrent.TimeUnit;
 public class PrettyPrinter implements AppointmentBookDumper {
     private String filename;
 
+    PrettyPrinter()
+    {
+        this.filename="";
+    }
+
     PrettyPrinter(String filename){
         this.filename=filename;
     }
@@ -51,22 +56,13 @@ public class PrettyPrinter implements AppointmentBookDumper {
             ostream.write(str.getBytes());
             i++;
         }
-//        ostream.write(abstractAppointmentBook.getOwnerName().getBytes());
-//        ostream.write("\n".getBytes());
-//        ArrayList<Appointment> currentappointments = new ArrayList<Appointment>();
-//        currentappointments = (ArrayList)abstractAppointmentBook.getAppointments();
-//        for (Appointment appointment : currentappointments) {
-//            ostream.write(appointment.description.getBytes());
-//            ostream.write("*#*".getBytes());
-//            //ostream.write(appointment.beginTime.toString().getBytes());
-//            ostream.write(df.format(appointment.beginTime).getBytes());
-//            ostream.write("*#*".getBytes());
-//            //ostream.write(appointment.endTime.toString().getBytes());
-//            ostream.write(df.format(appointment.endTime).getBytes());
-//            ostream.write("\n".getBytes());
-//        }
     }
 
+
+    /**
+     * Pretty prints an appointment book to standard out
+     * @param book The book to be printed
+     */
     public void printtostdout(AbstractAppointmentBook book)
     {
         DateFormat df = DateFormat.getDateTimeInstance(DateFormat.SHORT,DateFormat.SHORT);
