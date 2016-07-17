@@ -104,14 +104,19 @@ public class TextParser implements edu.pdx.cs410J.AppointmentBookParser {
             }
 
         } catch (FileNotFoundException e) {
-//            try {
-//                FileOutputStream outputStream = new FileOutputStream(filename);
-//            } catch (FileNotFoundException e1) {
-//                System.err.println("Error creating file. Please try again.");
-//                return new AppointmentBook();
-//            }
-            System.err.println("Could not find file: " + filename + ". Creating empty appointment book with null objects.");
-            return new AppointmentBook();
+            try {
+                FileOutputStream outputStream = new FileOutputStream(filename);
+                outputStream.write(this.owner.getBytes());
+                apptbook.owner=this.owner;
+            } catch (FileNotFoundException e1) {
+                System.err.println("Error creating file. Please try again.");
+                return new AppointmentBook();
+            } catch (IOException e1) {
+                System.err.println("Error writing to file. Please try again");
+                return new AppointmentBook();
+            }
+//            System.err.println("Could not find file: " + filename + ". Creating empty appointment book with null objects.");
+//            return new AppointmentBook();
         } catch (IOException e) {
             throw new ParserException("Error parsing file",e);
         } catch (ParseException e) {

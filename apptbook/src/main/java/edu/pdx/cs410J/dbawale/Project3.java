@@ -248,12 +248,13 @@ public class Project3 {
                 appointmentadded=false;
                 book.addAppointment(appointment);
             }
-            TextDumper dumper = new TextDumper();
+            TextDumper dumper = new TextDumper(filename);
             dumper.dump(book);
 
         } catch (ParserException e) {
-            System.err.println("There was a problem in the file:");
-            System.err.println(e.getMessage());
+            System.err.println("There was a problem in the file: "+ e.getMessage() + "\n" +
+                    "Could not write appointment to file." );
+            //System.err.println(e.getMessage());
             exit(1);
         } catch (IOException e) {
             System.err.println("Error writing appointmentbook to file.");

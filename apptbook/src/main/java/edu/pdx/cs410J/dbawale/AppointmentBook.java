@@ -17,7 +17,7 @@ public class AppointmentBook extends AbstractAppointmentBook {
 
     public AppointmentBook(){
         this.owner=null;
-        this.appointmentList=null;
+        this.appointmentList=new ArrayList<Appointment>();
     }
 
     /**
@@ -53,6 +53,7 @@ public class AppointmentBook extends AbstractAppointmentBook {
      */
     @Override
     public void addAppointment(AbstractAppointment abstractAppointment) {
+
         this.appointmentList.add((Appointment) abstractAppointment);
         this.sort();
     }

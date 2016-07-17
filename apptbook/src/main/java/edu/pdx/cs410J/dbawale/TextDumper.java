@@ -13,6 +13,19 @@ import java.util.ArrayList;
  */
 public class TextDumper implements edu.pdx.cs410J.AppointmentBookDumper
 {
+    String filename;
+
+    /**
+     *
+     * Constructor for the TextDumper class.
+     * Creates a text dumper with a filename
+     * @param filename the name of the file to be dumped to
+     */
+    public TextDumper(String filename)
+    {
+        this.filename=filename;
+    }
+
     /**
      * Dumps the data specified on the command line to a file with a pre-specified format
      * @param abstractAppointmentBook The appointment book to be dumped to file
@@ -20,7 +33,8 @@ public class TextDumper implements edu.pdx.cs410J.AppointmentBookDumper
      */
     @Override
     public void dump(AbstractAppointmentBook abstractAppointmentBook) throws IOException {
-        FileOutputStream ostream = new FileOutputStream(abstractAppointmentBook.getOwnerName());
+        //FileOutputStream ostream = new FileOutputStream(abstractAppointmentBook.getOwnerName());
+        FileOutputStream ostream = new FileOutputStream(filename);
         DateFormat df = DateFormat.getDateTimeInstance(DateFormat.SHORT,DateFormat.SHORT);
         ostream.write(abstractAppointmentBook.getOwnerName().getBytes());
         ostream.write("\n".getBytes());

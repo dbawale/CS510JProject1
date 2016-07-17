@@ -248,7 +248,7 @@ public class Project2 {
                 appointmentadded=false;
                 book.addAppointment(appointment);
             }
-            TextDumper dumper = new TextDumper();
+            TextDumper dumper = new TextDumper(filename);
             dumper.dump(book);
 
         } catch (ParserException e) {
