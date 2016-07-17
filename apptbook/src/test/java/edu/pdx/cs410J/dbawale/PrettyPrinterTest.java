@@ -43,6 +43,19 @@ public class PrettyPrinterTest {
         }
     }
 
+    @Test
+    public void TestToStdOut()
+    {
+        AppointmentBook book = new AppointmentBook("deven");
+        Appointment appt =createAppointmentWithHello();
+        Appointment appt1 = new Appointment("hello2",new Date("7/14/2016 11:24 am"),new Date("7/17/2016 11:00 am"));
+        book.addAppointment(appt);
+        book.addAppointment(appt1);
+        PrettyPrinter pretty = new PrettyPrinter("pretty.txt");
+
+            pretty.printtostdout(book);
+    }
+
     private Appointment createAppointmentWithHello() {
         return new Appointment("hello",new Date("7/16/2016 11:24 am"), new Date("7/17/2016 11:24 am"));
     }

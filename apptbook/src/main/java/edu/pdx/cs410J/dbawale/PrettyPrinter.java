@@ -66,4 +66,29 @@ public class PrettyPrinter implements AppointmentBookDumper {
 //            ostream.write("\n".getBytes());
 //        }
     }
+
+    public void printtostdout(AbstractAppointmentBook book)
+    {
+        DateFormat df = DateFormat.getDateTimeInstance(DateFormat.SHORT,DateFormat.SHORT);
+        ArrayList<Appointment> currentAppointments = (ArrayList)book.getAppointments();
+        System.out.print("This appoinment book belongs to: ");
+        System.out.print(book.getOwnerName());
+        System.out.print("\n");
+        String str = "There are " + currentAppointments.size() + " appointments in this appointment book.\n\n";
+        System.out.print(str);
+        str = "The appointments are:\n\n";
+        System.out.print(str);
+        int i=1;
+        for(Appointment appt : currentAppointments)
+        {
+            str = i + ": " + appt.getDescription() + "\n";
+            System.out.print(str);
+            str = "   Starts at: " + df.format(appt.beginTime) + "\t\t" + "Ends at: " + df.format(appt.endTime) + "\n";
+            System.out.print(str);
+            long diff = appt.endTime.getTime() - appt.beginTime.getTime();
+            str = "   The duration of this appointment is " + TimeUnit.MILLISECONDS.toMinutes(diff) + " minutes. \n\n";
+            System.out.print(str);
+            i++;
+        }
+    }
 }
