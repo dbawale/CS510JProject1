@@ -15,6 +15,10 @@ public class AppointmentBook extends AbstractAppointmentBook {
     String owner;
     ArrayList<Appointment> appointmentList;
 
+    /**
+     * Default constructor for AppointmentBook
+     * Assigns owner as null and creates empty appointment list
+     */
     public AppointmentBook(){
         this.owner=null;
         this.appointmentList=new ArrayList<Appointment>();

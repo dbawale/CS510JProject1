@@ -17,11 +17,19 @@ import java.util.concurrent.TimeUnit;
 public class PrettyPrinter implements AppointmentBookDumper {
     private String filename;
 
+    /**
+     * Default constructor for PrettyPrinter.
+     * Assigns an empty filename.
+     */
     PrettyPrinter()
     {
         this.filename="";
     }
 
+    /**
+     * Constructor for pretty printer with filename
+     * @param filename The name of the file to be printed to
+     */
     PrettyPrinter(String filename){
         this.filename=filename;
     }

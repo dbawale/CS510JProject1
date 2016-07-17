@@ -29,6 +29,8 @@ public class Project3 {
     private static Boolean appointmentadded=false;
     private static AppointmentBook book;
     private static Appointment appointment;
+    private static String prettyfile="";
+    private static Boolean prettyprint=false;
 
     /**
      * The main method for the appointment book Project. Creates an appointment specified by
@@ -50,7 +52,8 @@ public class Project3 {
             {
                 System.out.println("This program creates a new appointment for the owner specified and saves it in the\n" +
                         "Appointment class. It can also optionally print the appointment details.\n" +
-                        "It can optionally read and write appointments to an appointment book present in a file.");
+                        "It can optionally read and write appointments to an appointment book present in a file." + "\n" +
+                        "It can optionally pretty print appointments to a file or to the standard output console\n");
                 exit(0);
             }
         }
@@ -61,10 +64,17 @@ public class Project3 {
             {
                 try {
                     checkcurrentoption(args[i],args,i);
-                    if(processfile && !args[i].equals("-print"))
+                   // if(processfile && !args[i].equals("-print") && !args[i].equals("-pretty"))
+                    if(processfile&&args[i].equals("-textFile"))
                     {
                         i+=1;
                         textFile=args[i];
+                    }
+                    //if(prettyprint && !args[i].equals("-print") && !args[i].equals("-textFile"))
+                    if(prettyprint&&args[i].equals("-pretty"))
+                    {
+                        i+=1;
+                        prettyfile=args[i];
                     }
                 } catch (Exception e) {
                     System.err.println("Incorrect option detected. Please try again.");
@@ -87,7 +97,21 @@ public class Project3 {
         if(appointmentadded && processfile){
             readandaddappointments(textFile,owner);
         }
-
+        if(prettyprint && prettyfile.equals("-"))
+        {
+            PrettyPrinter prettyPrinter = new PrettyPrinter();
+            prettyPrinter.printtostdout(book);
+        }
+        if(prettyprint && !prettyfile.equals("-"))
+        {
+            PrettyPrinter prettyPrinter = new PrettyPrinter(prettyfile);
+            try {
+                prettyPrinter.dump(book);
+            } catch (IOException e) {
+                System.err.println("Error printing to pretty file : "+prettyfile);
+                exit(1);
+            }
+        }
 
         exit(0);
 
@@ -178,7 +202,7 @@ public class Project3 {
         {
             throw new Exception();
         }
-        else if(args.length>12)
+        else if(args.length>14)
         {
             throw new Exception();
         }
@@ -225,6 +249,9 @@ public class Project3 {
                 processfile=true;
                 //readandaddappointments(args[index+1]);
                 textFile=args[index+1];
+                break;
+            case "-pretty":
+                prettyprint=true;
                 break;
             default:
                 throw new Exception();
